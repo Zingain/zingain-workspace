@@ -1,5 +1,14 @@
 # Changelog
 
+<a name="0.0.3"></a>
+## 0.0.3 (2022-03-01)
+
+### Added
+
+- ✨ feat(backend-main): create a serverless backend application [44617d6]
+- ✨ feat(frontend-main): create a next js application [2d654f4]
+
+
 <a name="0.0.2"></a>
 ## 0.0.2 (2022-03-01)
 
