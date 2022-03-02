@@ -5,6 +5,7 @@
     "codegen-sdk": "libs/codegen-sdk",
     "frontend-main": "apps/frontend/main",
     "frontend-main-e2e": "apps/frontend/main-e2e",
-    "shared-backend": "libs/shared-backend"
+    "shared-backend": "libs/shared-backend",
+    "shared-frontend": "libs/shared-frontend"
   }
 }

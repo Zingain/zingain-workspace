@@ -16,7 +16,10 @@
     "baseUrl": ".",
     "paths": {
       "@zingain-workspace/codegen-sdk": ["libs/codegen-sdk/src/index.ts"],
-      "@zingain-workspace/shared-backend": ["libs/shared-backend/src/index.ts"]
+      "@zingain-workspace/shared-backend": ["libs/shared-backend/src/index.ts"],
+      "@zingain-workspace/shared-frontend": [
+        "libs/shared-frontend/src/index.ts"
+      ]
     }
   },
   "exclude": ["node_modules", "tmp"]
