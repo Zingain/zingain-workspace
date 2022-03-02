@@ -3,10 +3,14 @@
   "version": "0.0.3",
   "license": "MIT",
   "scripts": {
-    "start": "nx serve",
-    "build": "nx build",
-    "test": "nx test",
     "postinstall": "husky install",
+    "test": "nx test",
+    "clean": "rimraf node_modules/.cache/nx dist",
+    "start": "nx run-many --target=serve --all --parallel --maxParallel=20",
+    "build": "nx run-many --target=build --all --parallel --maxParallel=20",
+    "backend:start": "nx run-many --target=serve --projects=backend-main --parallel --maxParallel=20",
+    "frontend:start": "nx run-many --target=serve --projects=frontend-main --parallel --maxParallel=20",
+    "commit": "git-cz",
     "release": "standard-version -a"
   },
   "private": true,
@@ -65,8 +69,7 @@
       "changelog": true
     },
     "scripts": {
-      "postbump": "gitmoji-changelog update",
-      "precommit": "git add CHANGELOG.md"
+      "postbump": "gitmoji-changelog update"
     }
   },
   "dependencies": {

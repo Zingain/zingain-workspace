@@ -26,7 +26,7 @@ encrypt-envs-stage:
 	@find . -name ".env.production.gpg" -exec rm -rf {} ';'
 	@find . -name ".env.production" -exec gpg --passphrase "$(PASSPHRASE_PRODUCTION)" --quiet --yes --batch -c {} ';'
 
-decrypt-env-stage:
+decrypt-envs-stage:
 	@echo
 	@echo "🔓 Decrypt secrets development"
 	@echo
@@ -119,6 +119,7 @@ check-hasura:
 
 recreate:
 	@$(MAKE) --no-print-directory delete -i
+	@$(MAKE) --no-print-directory decrypt-envs-stage
 	@$(MAKE) --no-print-directory build-deploy
 	@$(MAKE) --no-print-directory check-hasura
 	@$(MAKE) --no-print-directory hasura-migrate
