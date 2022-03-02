@@ -1,1 +1,1 @@
-export * from './lib/codegen-sdk';
+export * from './generated/sdk';

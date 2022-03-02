@@ -48,6 +48,7 @@
     "@types/react-dom": "17.0.9",
     "@typescript-eslint/eslint-plugin": "~5.10.0",
     "@typescript-eslint/parser": "~5.10.0",
+    "autoprefixer": "^10.4.2",
     "babel-jest": "27.2.3",
     "commitizen": "^4.2.4",
     "commitlint-config-gitmoji": "^2.2.5",
@@ -63,12 +64,14 @@
     "eslint-plugin-react-hooks": "4.3.0",
     "husky": "^7.0.4",
     "jest": "27.2.3",
+    "postcss": "^8.4.7",
     "prettier": "^2.5.1",
     "react-test-renderer": "17.0.2",
     "serverless": "^3.2.1",
     "serverless-bundle": "^5.3.0",
     "serverless-offline": "^8.4.0",
     "standard-version": "^9.3.2",
+    "tailwindcss": "^3.0.23",
     "ts-jest": "27.0.5",
     "typescript": "~4.5.2"
   },
@@ -77,13 +80,20 @@
       "changelog": true
     },
     "scripts": {
-      "postbump": "gitmoji-changelog update"
+      "postbump": "gitmoji-changelog update",
+      "precommit": "git add CHANGELOG.md"
     }
   },
   "dependencies": {
+    "@apollo/client": "^3.5.10",
+    "@nhost/react-apollo": "^2.1.4",
+    "@nhost/react-auth": "^2.0.8",
     "@nrwl/next": "13.8.3",
     "core-js": "^3.6.5",
+    "graphql": "^15.8.0",
+    "graphql-tag": "^2.12.6",
     "next": "12.1.0",
+    "nhost-js-sdk": "^3.1.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "regenerator-runtime": "0.13.7",
