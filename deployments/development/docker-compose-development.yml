@@ -1,0 +1,45 @@
+version: '3.6'
+services:
+  postgres:
+    image: nhost/postgres:12-v0.0.6
+    restart: always
+    ports:
+      - 5432:5432
+    env_file: $BASE_PATH/services/postgres/.env.development
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  hasura:
+    image: hasura/graphql-engine:v2.2.1
+    restart: always
+    depends_on:
+      - postgres
+    ports:
+      - 8080:8080
+    env_file: $BASE_PATH/services/hasura/.env.development
+
+  hasura-backend-plus:
+    image: nhost/hasura-backend-plus:latest
+    restart: always
+    depends_on:
+      - hasura
+    ports:
+      - '4000:4000'
+    env_file: $BASE_PATH/services/hasura-backend-plus/.env.development
+    volumes:
+      - $BASE_PATH/services/hasura-backend-plus/custom:/app/custom
+
+  minio:
+    image: minio/minio
+    restart: always
+    depends_on:
+      - hasura-backend-plus
+    entrypoint: sh
+    command: "-c 'mkdir -p /export/hasura-backend-plus && /opt/bin/minio server /export'"
+    env_file: $BASE_PATH/services/minio/.env.development
+    volumes:
+      - minio_data:/data
+
+volumes:
+  db_data:
+  minio_data:
