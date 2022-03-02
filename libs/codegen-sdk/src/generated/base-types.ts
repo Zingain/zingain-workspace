@@ -113,6 +113,20 @@ export type Auth_Account_Providers_Aggregate_FieldsCountArgs = {
   distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
+/** order by aggregate values of table "auth.account_providers" */
+export type Auth_Account_Providers_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Auth_Account_Providers_Max_Order_By>;
+  min?: InputMaybe<Auth_Account_Providers_Min_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "auth.account_providers" */
+export type Auth_Account_Providers_Arr_Rel_Insert_Input = {
+  data: Array<Auth_Account_Providers_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Auth_Account_Providers_On_Conflict>;
+};
+
 /** Boolean expression to filter rows from the table "auth.account_providers". All fields are combined with a logical 'AND'. */
 export type Auth_Account_Providers_Bool_Exp = {
   _and?: InputMaybe<Array<Auth_Account_Providers_Bool_Exp>>;
@@ -161,6 +175,16 @@ export type Auth_Account_Providers_Max_Fields = {
   updated_at?: Maybe<Scalars['timestamptz']>;
 };
 
+/** order by max() on columns of table "auth.account_providers" */
+export type Auth_Account_Providers_Max_Order_By = {
+  account_id?: InputMaybe<Order_By>;
+  auth_provider?: InputMaybe<Order_By>;
+  auth_provider_unique_id?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
 /** aggregate min on columns */
 export type Auth_Account_Providers_Min_Fields = {
   __typename?: 'auth_account_providers_min_fields';
@@ -170,6 +194,16 @@ export type Auth_Account_Providers_Min_Fields = {
   created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
+};
+
+/** order by min() on columns of table "auth.account_providers" */
+export type Auth_Account_Providers_Min_Order_By = {
+  account_id?: InputMaybe<Order_By>;
+  auth_provider?: InputMaybe<Order_By>;
+  auth_provider_unique_id?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "auth.account_providers" */
@@ -282,6 +316,20 @@ export type Auth_Account_Roles_Aggregate_FieldsCountArgs = {
   distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
+/** order by aggregate values of table "auth.account_roles" */
+export type Auth_Account_Roles_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Auth_Account_Roles_Max_Order_By>;
+  min?: InputMaybe<Auth_Account_Roles_Min_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "auth.account_roles" */
+export type Auth_Account_Roles_Arr_Rel_Insert_Input = {
+  data: Array<Auth_Account_Roles_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Auth_Account_Roles_On_Conflict>;
+};
+
 /** Boolean expression to filter rows from the table "auth.account_roles". All fields are combined with a logical 'AND'. */
 export type Auth_Account_Roles_Bool_Exp = {
   _and?: InputMaybe<Array<Auth_Account_Roles_Bool_Exp>>;
@@ -322,6 +370,14 @@ export type Auth_Account_Roles_Max_Fields = {
   role?: Maybe<Scalars['String']>;
 };
 
+/** order by max() on columns of table "auth.account_roles" */
+export type Auth_Account_Roles_Max_Order_By = {
+  account_id?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  role?: InputMaybe<Order_By>;
+};
+
 /** aggregate min on columns */
 export type Auth_Account_Roles_Min_Fields = {
   __typename?: 'auth_account_roles_min_fields';
@@ -329,6 +385,14 @@ export type Auth_Account_Roles_Min_Fields = {
   created_at?: Maybe<Scalars['timestamptz']>;
   id?: Maybe<Scalars['uuid']>;
   role?: Maybe<Scalars['String']>;
+};
+
+/** order by min() on columns of table "auth.account_roles" */
+export type Auth_Account_Roles_Min_Order_By = {
+  account_id?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  role?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "auth.account_roles" */
@@ -397,6 +461,14 @@ export enum Auth_Account_Roles_Update_Column {
 /** columns and relationships of "auth.accounts" */
 export type Auth_Accounts = {
   __typename?: 'auth_accounts';
+  /** An array relationship */
+  account_providers: Array<Auth_Account_Providers>;
+  /** An aggregate relationship */
+  account_providers_aggregate: Auth_Account_Providers_Aggregate;
+  /** An array relationship */
+  account_roles: Array<Auth_Account_Roles>;
+  /** An aggregate relationship */
+  account_roles_aggregate: Auth_Account_Roles_Aggregate;
   active: Scalars['Boolean'];
   created_at: Scalars['timestamptz'];
   custom_register_data?: Maybe<Scalars['jsonb']>;
@@ -408,6 +480,10 @@ export type Auth_Accounts = {
   new_email?: Maybe<Scalars['citext']>;
   otp_secret?: Maybe<Scalars['String']>;
   password_hash?: Maybe<Scalars['String']>;
+  /** An array relationship */
+  refresh_tokens: Array<Auth_Refresh_Tokens>;
+  /** An aggregate relationship */
+  refresh_tokens_aggregate: Auth_Refresh_Tokens_Aggregate;
   /** An object relationship */
   role: Auth_Roles;
   ticket: Scalars['uuid'];
@@ -420,8 +496,68 @@ export type Auth_Accounts = {
 
 
 /** columns and relationships of "auth.accounts" */
+export type Auth_AccountsAccount_ProvidersArgs = {
+  distinct_on?: InputMaybe<Array<Auth_Account_Providers_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Auth_Account_Providers_Order_By>>;
+  where?: InputMaybe<Auth_Account_Providers_Bool_Exp>;
+};
+
+
+/** columns and relationships of "auth.accounts" */
+export type Auth_AccountsAccount_Providers_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Auth_Account_Providers_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Auth_Account_Providers_Order_By>>;
+  where?: InputMaybe<Auth_Account_Providers_Bool_Exp>;
+};
+
+
+/** columns and relationships of "auth.accounts" */
+export type Auth_AccountsAccount_RolesArgs = {
+  distinct_on?: InputMaybe<Array<Auth_Account_Roles_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Auth_Account_Roles_Order_By>>;
+  where?: InputMaybe<Auth_Account_Roles_Bool_Exp>;
+};
+
+
+/** columns and relationships of "auth.accounts" */
+export type Auth_AccountsAccount_Roles_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Auth_Account_Roles_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Auth_Account_Roles_Order_By>>;
+  where?: InputMaybe<Auth_Account_Roles_Bool_Exp>;
+};
+
+
+/** columns and relationships of "auth.accounts" */
 export type Auth_AccountsCustom_Register_DataArgs = {
   path?: InputMaybe<Scalars['String']>;
+};
+
+
+/** columns and relationships of "auth.accounts" */
+export type Auth_AccountsRefresh_TokensArgs = {
+  distinct_on?: InputMaybe<Array<Auth_Refresh_Tokens_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Auth_Refresh_Tokens_Order_By>>;
+  where?: InputMaybe<Auth_Refresh_Tokens_Bool_Exp>;
+};
+
+
+/** columns and relationships of "auth.accounts" */
+export type Auth_AccountsRefresh_Tokens_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Auth_Refresh_Tokens_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Auth_Refresh_Tokens_Order_By>>;
+  where?: InputMaybe<Auth_Refresh_Tokens_Bool_Exp>;
 };
 
 /** aggregated selection of "auth.accounts" */
@@ -446,9 +582,23 @@ export type Auth_Accounts_Aggregate_FieldsCountArgs = {
   distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
+/** order by aggregate values of table "auth.accounts" */
+export type Auth_Accounts_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Auth_Accounts_Max_Order_By>;
+  min?: InputMaybe<Auth_Accounts_Min_Order_By>;
+};
+
 /** append existing jsonb value of filtered columns with new jsonb value */
 export type Auth_Accounts_Append_Input = {
   custom_register_data?: InputMaybe<Scalars['jsonb']>;
+};
+
+/** input type for inserting array relation for remote table "auth.accounts" */
+export type Auth_Accounts_Arr_Rel_Insert_Input = {
+  data: Array<Auth_Accounts_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Auth_Accounts_On_Conflict>;
 };
 
 /** Boolean expression to filter rows from the table "auth.accounts". All fields are combined with a logical 'AND'. */
@@ -456,6 +606,8 @@ export type Auth_Accounts_Bool_Exp = {
   _and?: InputMaybe<Array<Auth_Accounts_Bool_Exp>>;
   _not?: InputMaybe<Auth_Accounts_Bool_Exp>;
   _or?: InputMaybe<Array<Auth_Accounts_Bool_Exp>>;
+  account_providers?: InputMaybe<Auth_Account_Providers_Bool_Exp>;
+  account_roles?: InputMaybe<Auth_Account_Roles_Bool_Exp>;
   active?: InputMaybe<Boolean_Comparison_Exp>;
   created_at?: InputMaybe<Timestamptz_Comparison_Exp>;
   custom_register_data?: InputMaybe<Jsonb_Comparison_Exp>;
@@ -467,6 +619,7 @@ export type Auth_Accounts_Bool_Exp = {
   new_email?: InputMaybe<Citext_Comparison_Exp>;
   otp_secret?: InputMaybe<String_Comparison_Exp>;
   password_hash?: InputMaybe<String_Comparison_Exp>;
+  refresh_tokens?: InputMaybe<Auth_Refresh_Tokens_Bool_Exp>;
   role?: InputMaybe<Auth_Roles_Bool_Exp>;
   ticket?: InputMaybe<Uuid_Comparison_Exp>;
   ticket_expires_at?: InputMaybe<Timestamptz_Comparison_Exp>;
@@ -504,6 +657,8 @@ export type Auth_Accounts_Delete_Key_Input = {
 
 /** input type for inserting data into table "auth.accounts" */
 export type Auth_Accounts_Insert_Input = {
+  account_providers?: InputMaybe<Auth_Account_Providers_Arr_Rel_Insert_Input>;
+  account_roles?: InputMaybe<Auth_Account_Roles_Arr_Rel_Insert_Input>;
   active?: InputMaybe<Scalars['Boolean']>;
   created_at?: InputMaybe<Scalars['timestamptz']>;
   custom_register_data?: InputMaybe<Scalars['jsonb']>;
@@ -515,6 +670,7 @@ export type Auth_Accounts_Insert_Input = {
   new_email?: InputMaybe<Scalars['citext']>;
   otp_secret?: InputMaybe<Scalars['String']>;
   password_hash?: InputMaybe<Scalars['String']>;
+  refresh_tokens?: InputMaybe<Auth_Refresh_Tokens_Arr_Rel_Insert_Input>;
   role?: InputMaybe<Auth_Roles_Obj_Rel_Insert_Input>;
   ticket?: InputMaybe<Scalars['uuid']>;
   ticket_expires_at?: InputMaybe<Scalars['timestamptz']>;
@@ -539,6 +695,21 @@ export type Auth_Accounts_Max_Fields = {
   user_id?: Maybe<Scalars['uuid']>;
 };
 
+/** order by max() on columns of table "auth.accounts" */
+export type Auth_Accounts_Max_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  default_role?: InputMaybe<Order_By>;
+  email?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  new_email?: InputMaybe<Order_By>;
+  otp_secret?: InputMaybe<Order_By>;
+  password_hash?: InputMaybe<Order_By>;
+  ticket?: InputMaybe<Order_By>;
+  ticket_expires_at?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
+};
+
 /** aggregate min on columns */
 export type Auth_Accounts_Min_Fields = {
   __typename?: 'auth_accounts_min_fields';
@@ -553,6 +724,21 @@ export type Auth_Accounts_Min_Fields = {
   ticket_expires_at?: Maybe<Scalars['timestamptz']>;
   updated_at?: Maybe<Scalars['timestamptz']>;
   user_id?: Maybe<Scalars['uuid']>;
+};
+
+/** order by min() on columns of table "auth.accounts" */
+export type Auth_Accounts_Min_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  default_role?: InputMaybe<Order_By>;
+  email?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  new_email?: InputMaybe<Order_By>;
+  otp_secret?: InputMaybe<Order_By>;
+  password_hash?: InputMaybe<Order_By>;
+  ticket?: InputMaybe<Order_By>;
+  ticket_expires_at?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+  user_id?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "auth.accounts" */
@@ -580,6 +766,8 @@ export type Auth_Accounts_On_Conflict = {
 
 /** Ordering options when selecting data from "auth.accounts". */
 export type Auth_Accounts_Order_By = {
+  account_providers_aggregate?: InputMaybe<Auth_Account_Providers_Aggregate_Order_By>;
+  account_roles_aggregate?: InputMaybe<Auth_Account_Roles_Aggregate_Order_By>;
   active?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   custom_register_data?: InputMaybe<Order_By>;
@@ -591,6 +779,7 @@ export type Auth_Accounts_Order_By = {
   new_email?: InputMaybe<Order_By>;
   otp_secret?: InputMaybe<Order_By>;
   password_hash?: InputMaybe<Order_By>;
+  refresh_tokens_aggregate?: InputMaybe<Auth_Refresh_Tokens_Aggregate_Order_By>;
   role?: InputMaybe<Auth_Roles_Order_By>;
   ticket?: InputMaybe<Order_By>;
   ticket_expires_at?: InputMaybe<Order_By>;
@@ -897,7 +1086,31 @@ export type Auth_Migrations_Variance_Fields = {
 /** columns and relationships of "auth.providers" */
 export type Auth_Providers = {
   __typename?: 'auth_providers';
+  /** An array relationship */
+  account_providers: Array<Auth_Account_Providers>;
+  /** An aggregate relationship */
+  account_providers_aggregate: Auth_Account_Providers_Aggregate;
   provider: Scalars['String'];
+};
+
+
+/** columns and relationships of "auth.providers" */
+export type Auth_ProvidersAccount_ProvidersArgs = {
+  distinct_on?: InputMaybe<Array<Auth_Account_Providers_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Auth_Account_Providers_Order_By>>;
+  where?: InputMaybe<Auth_Account_Providers_Bool_Exp>;
+};
+
+
+/** columns and relationships of "auth.providers" */
+export type Auth_ProvidersAccount_Providers_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Auth_Account_Providers_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Auth_Account_Providers_Order_By>>;
+  where?: InputMaybe<Auth_Account_Providers_Bool_Exp>;
 };
 
 /** aggregated selection of "auth.providers" */
@@ -927,6 +1140,7 @@ export type Auth_Providers_Bool_Exp = {
   _and?: InputMaybe<Array<Auth_Providers_Bool_Exp>>;
   _not?: InputMaybe<Auth_Providers_Bool_Exp>;
   _or?: InputMaybe<Array<Auth_Providers_Bool_Exp>>;
+  account_providers?: InputMaybe<Auth_Account_Providers_Bool_Exp>;
   provider?: InputMaybe<String_Comparison_Exp>;
 };
 
@@ -938,6 +1152,7 @@ export enum Auth_Providers_Constraint {
 
 /** input type for inserting data into table "auth.providers" */
 export type Auth_Providers_Insert_Input = {
+  account_providers?: InputMaybe<Auth_Account_Providers_Arr_Rel_Insert_Input>;
   provider?: InputMaybe<Scalars['String']>;
 };
 
@@ -978,6 +1193,7 @@ export type Auth_Providers_On_Conflict = {
 
 /** Ordering options when selecting data from "auth.providers". */
 export type Auth_Providers_Order_By = {
+  account_providers_aggregate?: InputMaybe<Auth_Account_Providers_Aggregate_Order_By>;
   provider?: InputMaybe<Order_By>;
 };
 
@@ -1036,6 +1252,20 @@ export type Auth_Refresh_Tokens_Aggregate_FieldsCountArgs = {
   distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
+/** order by aggregate values of table "auth.refresh_tokens" */
+export type Auth_Refresh_Tokens_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Auth_Refresh_Tokens_Max_Order_By>;
+  min?: InputMaybe<Auth_Refresh_Tokens_Min_Order_By>;
+};
+
+/** input type for inserting array relation for remote table "auth.refresh_tokens" */
+export type Auth_Refresh_Tokens_Arr_Rel_Insert_Input = {
+  data: Array<Auth_Refresh_Tokens_Insert_Input>;
+  /** upsert condition */
+  on_conflict?: InputMaybe<Auth_Refresh_Tokens_On_Conflict>;
+};
+
 /** Boolean expression to filter rows from the table "auth.refresh_tokens". All fields are combined with a logical 'AND'. */
 export type Auth_Refresh_Tokens_Bool_Exp = {
   _and?: InputMaybe<Array<Auth_Refresh_Tokens_Bool_Exp>>;
@@ -1072,6 +1302,14 @@ export type Auth_Refresh_Tokens_Max_Fields = {
   refresh_token?: Maybe<Scalars['uuid']>;
 };
 
+/** order by max() on columns of table "auth.refresh_tokens" */
+export type Auth_Refresh_Tokens_Max_Order_By = {
+  account_id?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  expires_at?: InputMaybe<Order_By>;
+  refresh_token?: InputMaybe<Order_By>;
+};
+
 /** aggregate min on columns */
 export type Auth_Refresh_Tokens_Min_Fields = {
   __typename?: 'auth_refresh_tokens_min_fields';
@@ -1079,6 +1317,14 @@ export type Auth_Refresh_Tokens_Min_Fields = {
   created_at?: Maybe<Scalars['timestamptz']>;
   expires_at?: Maybe<Scalars['timestamptz']>;
   refresh_token?: Maybe<Scalars['uuid']>;
+};
+
+/** order by min() on columns of table "auth.refresh_tokens" */
+export type Auth_Refresh_Tokens_Min_Order_By = {
+  account_id?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  expires_at?: InputMaybe<Order_By>;
+  refresh_token?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "auth.refresh_tokens" */
@@ -1146,7 +1392,55 @@ export enum Auth_Refresh_Tokens_Update_Column {
 /** columns and relationships of "auth.roles" */
 export type Auth_Roles = {
   __typename?: 'auth_roles';
+  /** An array relationship */
+  account_roles: Array<Auth_Account_Roles>;
+  /** An aggregate relationship */
+  account_roles_aggregate: Auth_Account_Roles_Aggregate;
+  /** An array relationship */
+  accounts: Array<Auth_Accounts>;
+  /** An aggregate relationship */
+  accounts_aggregate: Auth_Accounts_Aggregate;
   role: Scalars['String'];
+};
+
+
+/** columns and relationships of "auth.roles" */
+export type Auth_RolesAccount_RolesArgs = {
+  distinct_on?: InputMaybe<Array<Auth_Account_Roles_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Auth_Account_Roles_Order_By>>;
+  where?: InputMaybe<Auth_Account_Roles_Bool_Exp>;
+};
+
+
+/** columns and relationships of "auth.roles" */
+export type Auth_RolesAccount_Roles_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Auth_Account_Roles_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Auth_Account_Roles_Order_By>>;
+  where?: InputMaybe<Auth_Account_Roles_Bool_Exp>;
+};
+
+
+/** columns and relationships of "auth.roles" */
+export type Auth_RolesAccountsArgs = {
+  distinct_on?: InputMaybe<Array<Auth_Accounts_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Auth_Accounts_Order_By>>;
+  where?: InputMaybe<Auth_Accounts_Bool_Exp>;
+};
+
+
+/** columns and relationships of "auth.roles" */
+export type Auth_RolesAccounts_AggregateArgs = {
+  distinct_on?: InputMaybe<Array<Auth_Accounts_Select_Column>>;
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Auth_Accounts_Order_By>>;
+  where?: InputMaybe<Auth_Accounts_Bool_Exp>;
 };
 
 /** aggregated selection of "auth.roles" */
@@ -1176,6 +1470,8 @@ export type Auth_Roles_Bool_Exp = {
   _and?: InputMaybe<Array<Auth_Roles_Bool_Exp>>;
   _not?: InputMaybe<Auth_Roles_Bool_Exp>;
   _or?: InputMaybe<Array<Auth_Roles_Bool_Exp>>;
+  account_roles?: InputMaybe<Auth_Account_Roles_Bool_Exp>;
+  accounts?: InputMaybe<Auth_Accounts_Bool_Exp>;
   role?: InputMaybe<String_Comparison_Exp>;
 };
 
@@ -1187,6 +1483,8 @@ export enum Auth_Roles_Constraint {
 
 /** input type for inserting data into table "auth.roles" */
 export type Auth_Roles_Insert_Input = {
+  account_roles?: InputMaybe<Auth_Account_Roles_Arr_Rel_Insert_Input>;
+  accounts?: InputMaybe<Auth_Accounts_Arr_Rel_Insert_Input>;
   role?: InputMaybe<Scalars['String']>;
 };
 
@@ -1227,6 +1525,8 @@ export type Auth_Roles_On_Conflict = {
 
 /** Ordering options when selecting data from "auth.roles". */
 export type Auth_Roles_Order_By = {
+  account_roles_aggregate?: InputMaybe<Auth_Account_Roles_Aggregate_Order_By>;
+  accounts_aggregate?: InputMaybe<Auth_Accounts_Aggregate_Order_By>;
   role?: InputMaybe<Order_By>;
 };
 
