@@ -77,7 +77,8 @@
       "changelog": true
     },
     "scripts": {
-      "postbump": "gitmoji-changelog update"
+      "postbump": "gitmoji-changelog update",
+      "precommit": "git add CHANGELOG.md"
     }
   },
   "dependencies": {
