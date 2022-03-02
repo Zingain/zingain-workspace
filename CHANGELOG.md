@@ -1,5 +1,30 @@
 # Changelog
 
+<a name="0.0.5"></a>
+## 0.0.5 (2022-03-02)
+
+### Added
+
+- ✨ feat(hasura): auth metadata [[fb2317d](https://github.com/Zingain/zingain-workspace/commit/fb2317dd5110b01c54457977d295e8aaf7959ff4)]
+- ✨ feat(lib): add shared-frontend library [[157d159](https://github.com/Zingain/zingain-workspace/commit/157d1594e2c0ee1e259771ad509ac431f7c16bb9)]
+- ✨ feat(frontend-main): setup nhost for hasura backend plus [[1f59bf2](https://github.com/Zingain/zingain-workspace/commit/1f59bf27b32a0eeeb2c9f5730ada6ee2ab3bfb4b)]
+
+### Changed
+
+- 🚚 chore(hasura): add auth metadata, auto migrate on, encrypt env [[56b7e77](https://github.com/Zingain/zingain-workspace/commit/56b7e774baf4e150a5a3cf8fbf9593428c818f99)]
+- 🚚 chore(frontend-main): nhost configure [[7b98416](https://github.com/Zingain/zingain-workspace/commit/7b98416aff08d66ada7e86ec8b6362fb51c3fec9)]
+- 🚚 chore(lib): supporting functions for serverless [[25902b9](https://github.com/Zingain/zingain-workspace/commit/25902b91fd367019f0a7bd486d1b5188e9177191)]
+
+### Fixed
+
+- 🐛 fix(hasura): fix auto migration [[c37eab7](https://github.com/Zingain/zingain-workspace/commit/c37eab74a417db4a092bc0fa31a12a405bfdeb03)]
+
+### Miscellaneous
+
+-  Merge pull request [#1](https://github.com/Zingain/zingain-workspace/issues/1) from Zingain/nhost-setup [[9af27c0](https://github.com/Zingain/zingain-workspace/commit/9af27c0d27145522a471438f78bc4b690833ccc9)]
+-  chore(release): 0.0.4 [[f8f05fe](https://github.com/Zingain/zingain-workspace/commit/f8f05fe1775207a345b67026fe2fbbb979859237)]
+
+
 <a name="0.0.4"></a>
 ## 0.0.4 (2022-03-02)
 
