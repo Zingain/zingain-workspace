@@ -1,0 +1,9 @@
+query getUsersBackend {
+  users {
+    id
+    display_name
+    account {
+      email
+    }
+  }
+}

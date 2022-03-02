@@ -10,6 +10,7 @@
     "build": "nx run-many --target=build --all --parallel --maxParallel=20",
     "backend:start": "nx run-many --target=serve --projects=backend-main --parallel --maxParallel=20",
     "frontend:start": "nx run-many --target=serve --projects=frontend-main --parallel --maxParallel=20",
+    "codegen": "graphql-codegen --config codegen.config.yml -w",
     "commit": "git-cz",
     "release": "standard-version -a"
   },
