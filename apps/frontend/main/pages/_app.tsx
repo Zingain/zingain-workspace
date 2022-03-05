@@ -12,7 +12,7 @@ function CustomApp({ Component, pageProps }: AppProps) {
       <NhostAuthProvider nhost={client}>
         <NhostApolloProvider graphqlUrl={process.env.NEXT_PUBLIC_GRAPHQL_URL }>
           <Head>
-            <title>Welcome to main!</title>
+            <title>Zingain Workspace</title>
           </Head>
           <main className="app">
             <Component {...pageProps} />

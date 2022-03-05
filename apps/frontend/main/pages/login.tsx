@@ -13,13 +13,12 @@ const Login = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log(`email: ${email}`);
-    console.log(`password: ${password}`)
     try {
-      await (client as NhostClient).auth.login({
+      const res=await (client as NhostClient).auth.login({
         email: email,
         password:password
       })
+      console.log(res);
       router.push('/')
     } catch (error) {
       console.error(error)
