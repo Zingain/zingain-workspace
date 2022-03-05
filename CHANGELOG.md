@@ -51,8 +51,8 @@
 
 ### Added
 
-- ✨ feat(backend-main): create a serverless backend application [44617d6]
-- ✨ feat(frontend-main): create a next js application [2d654f4]
+- ✨ feat(backend-main): create a serverless backend application [[44617d6](https://github.com/Zingain/zingain-workspace/commit/44617d6dfa7e7c950ff8c18a98342af290d75e8f)]
+- ✨ feat(frontend-main): create a next js application [[2d654f4](https://github.com/Zingain/zingain-workspace/commit/2d654f47cdba18d7f6637d83b617920772a49df0)]
 
 
 <a name="0.0.2"></a>
@@ -60,9 +60,9 @@
 
 ### Changed
 
-- 🚚 chore(config): configure husky [3d296d1]
-- 🚚 chore(config): configure standard version, add workspace engines [8cdf123]
-- 🚚 chore(config): install and configure commitizen, commitlint [8d5894a]
+- 🚚 chore(config): configure husky [[3d296d1](https://github.com/Zingain/zingain-workspace/commit/3d296d1d1fffd74d8884d79beaf2cfdd09baa8a6)]
+- 🚚 chore(config): configure standard version, add workspace engines [[8cdf123](https://github.com/Zingain/zingain-workspace/commit/8cdf123f62eec77a75bfc84d01476f95c6720502)]
+- 🚚 chore(config): install and configure commitizen, commitlint [[8d5894a](https://github.com/Zingain/zingain-workspace/commit/8d5894a6bfeb56cd0a0d3e167721c41a80ef2bf7)]
 
 ### Fixed
 
@@ -70,6 +70,6 @@
 
 ### Miscellaneous
 
--  initial commit [956c606]
+-  initial commit [[956c606](https://github.com/Zingain/zingain-workspace/commit/956c60697fe15d7a5bcaf81766fd2546d682c393)]
 
 
