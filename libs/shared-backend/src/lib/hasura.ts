@@ -1,5 +1,6 @@
 import { getSdk } from '@zingain-workspace/codegen-sdk';
 import { GraphQLClient } from 'graphql-request';
+import { HasuraService } from './hasura-service';
 
 export const createHasura = () => {
   const config = {
@@ -16,10 +17,17 @@ export const createHasura = () => {
 
   const sdk = getSdk(client);
 
+  const hasura = new HasuraService(config.hasuraEndPoint, {
+    headers: {
+      'x-hasura-admin-secret': config.hasuraAdminSecret,
+    },
+  });
+
   return {
     sdk: {
       ...sdk,
     },
+    hasura,
   };
 };
 
