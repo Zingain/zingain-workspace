@@ -2,7 +2,7 @@ import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { NhostApolloProvider } from '@nhost/react-apollo';
 import { NhostAuthProvider } from '@nhost/react-auth'
-import 'tailwindcss/tailwind.css';
+import '../styles/global.css';
 
 import { client } from '../helpers/nhost';
 
