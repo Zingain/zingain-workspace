@@ -1,4 +1,4 @@
-import * as Types from '@workspace-starter/codegen-sdk/base-types';
+import * as Types from '@zingain-workspace/codegen-sdk/base-types';
 
 import { DocumentNode } from 'graphql';
 import * as Urql from 'urql';

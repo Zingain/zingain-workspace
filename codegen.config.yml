@@ -24,7 +24,7 @@ generates:
     preset: near-operation-file
     presetConfig:
       extension: .generated.ts
-      baseTypesPath: '~@workspace-starter/codegen-sdk/base-types'
+      baseTypesPath: '~@zingain-workspace/codegen-sdk/base-types'
     documents: './apps/frontend/main/**/**/*.graphql'
     plugins:
       - typescript-operations
