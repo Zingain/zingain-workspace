@@ -11,3 +11,11 @@ object_relationships:
       remote_table:
         name: accounts
         schema: auth
+array_relationships:
+- name: todos
+  using:
+    foreign_key_constraint_on:
+      column: created_by
+      table:
+        name: todos
+        schema: public
