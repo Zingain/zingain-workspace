@@ -1,5 +1,25 @@
 # Changelog
 
+<a name="0.0.6"></a>
+## 0.0.6 (2022-04-09)
+
+### Changed
+
+- ♻️ refactor(config): unhide envs, rename apps [[2ee7335](https://github.com/Zingain/zingain-workspace/commit/2ee7335a7cf19326f566d0ad1fa4a77859677f0c)]
+- ⚡ perf(backend-main): add hasura service file [[06b9685](https://github.com/Zingain/zingain-workspace/commit/06b96854bd6ecf9a231b8f8f1b8809a551636737)]
+
+### Fixed
+
+- 🐛 fix(config): fix codegen config file [[b943d9d](https://github.com/Zingain/zingain-workspace/commit/b943d9da33ad7d7f51d44cc00a1b507cb68309e8)]
+- 🐛 fix(frontend-main): fix warns, rm unwanted files [[a8d3760](https://github.com/Zingain/zingain-workspace/commit/a8d3760bd12349b6c5fffa079018e5831449a80b)]
+- 🐛 fix(frontend-main): refactor tailwind, upt make script [[76a1816](https://github.com/Zingain/zingain-workspace/commit/76a1816be4c5d71366d842a2aa12eeae028d711b)]
+
+### Miscellaneous
+
+-  Merge pull request [#2](https://github.com/Zingain/zingain-workspace/issues/2) from Zingain/refactor [[e57b7d1](https://github.com/Zingain/zingain-workspace/commit/e57b7d141703aeee1567d69285b9dbc46ef6abcb)]
+-  Update CHANGELOG.md [[026f842](https://github.com/Zingain/zingain-workspace/commit/026f842d932a549e375777de16d7970754dc1042)]
+
+
 <a name="0.0.5"></a>
 ## 0.0.5 (2022-03-02)
 
