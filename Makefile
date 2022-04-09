@@ -82,10 +82,12 @@ hasura-init:
 	@mkdir -p deployments/development && rm -rf $(COMPOSE_FILE_development) && curl -o $(COMPOSE_FILE_development) https://raw.githubusercontent.com/Zingain/zingain-workspace/main/deployments/development/docker-compose-development.yml
 	@curl -o .dockerignore https://raw.githubusercontent.com/Zingain/zingain-workspace/main/.dockerignore
 	@curl -o .gitignore https://raw.githubusercontent.com/Zingain/zingain-workspace/3c74e055ee8499552b362051c6814b9d312fd0e1/.gitignore
-	@npm i -D nx-tools/nx-docker
+	@npm i -D @nx-tools/nx-docker
 	@npx hasura init services/hasura --endpoint http://localhost:8080 --admin-secret LZrEbLC2wdqIBQjqgOqNwzuUdEWVmzdmtiZBV5LDUTLcXbCw0TR3JZ7
 	@mkdir -p services/hasura && rm -rf services/hasura/.env.development && curl -o services/hasura/.env.development https://raw.githubusercontent.com/Zingain/zingain-workspace/main/services/hasura/.env.development
-	@mkdir -p services/hasura-backend-plus && rm -rf services/hasura-backend-plus/.env.development && curl -o services/hasura-backend-plus/.env.development https://raw.githubusercontent.com/Zingain/zingain-workspace/main/services/hasura-backend-plus/.env.development
+	@git clone https://github.com/nhost/hasura-backend-plus.git hasura-backend-plus/custom/
+	@mv hasura-backend-plus services
+	@rm -rf services/hasura-backend-plus/.env.development && curl -o services/hasura-backend-plus/.env.development https://raw.githubusercontent.com/Zingain/zingain-workspace/main/services/hasura-backend-plus/.env.development
 	@mkdir -p services/minio && rm -rf services/minio/.env.development && curl -o services/minio/.env.development https://raw.githubusercontent.com/Zingain/zingain-workspace/main/services/minio/.env.development
 	@mkdir -p services/postgres && rm -rf services/postgres/.env.development && curl -o services/postgres/.env.development https://raw.githubusercontent.com/Zingain/zingain-workspace/main/services/postgres/.env.development
 
