@@ -1,5 +1,13 @@
 # Changelog
 
+<a name="0.0.7"></a>
+## 0.0.7 (2022-04-09)
+
+### Fixed
+
+- 🐛 fix(hasura): install urql, upt roles [[fcb9e58](https://github.com/Zingain/zingain-workspace/commit/fcb9e587b63521da6cac32f3ea3b3f04c0a8c6a9)]
+
+
 <a name="0.0.6"></a>
 ## 0.0.6 (2022-04-09)
 
