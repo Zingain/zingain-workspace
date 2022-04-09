@@ -18,12 +18,12 @@
     "serve": {
       "executor": "@nrwl/next:server",
       "options": {
-        "buildTarget": "frontend-main:build",
+        "buildTarget": "frontend:build",
         "dev": true
       },
       "configurations": {
         "production": {
-          "buildTarget": "frontend-main:build:production",
+          "buildTarget": "frontend:build:production",
           "dev": false
         }
       }
@@ -31,7 +31,7 @@
     "export": {
       "executor": "@nrwl/next:export",
       "options": {
-        "buildTarget": "frontend-main:build:production"
+        "buildTarget": "frontend:build:production"
       }
     },
     "test": {

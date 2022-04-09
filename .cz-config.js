@@ -36,8 +36,8 @@ module.exports = {
   ],
 
   scopes: [
-    { name: 'backend-main' },
-    { name: 'frontend-main' },
+    { name: 'backend' },
+    { name: 'frontend' },
     { name: 'hasura' },
     { name: 'lib' },
     { name: 'config' }

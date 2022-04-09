@@ -1,4 +1,4 @@
-service: backend-main
+service: backend
 
 plugins:
   - 'serverless-bundle'

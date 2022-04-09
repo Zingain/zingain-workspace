@@ -1,10 +1,10 @@
 {
   "version": 2,
   "projects": {
-    "backend-main": "apps/backend/main",
+    "backend": "apps/backend/main",
     "codegen-sdk": "libs/codegen-sdk",
-    "frontend-main": "apps/frontend/main",
-    "frontend-main-e2e": "apps/frontend/main-e2e",
+    "frontend": "apps/frontend/main",
+    "frontend-e2e": "apps/frontend/main-e2e",
     "shared-backend": "libs/shared-backend",
     "shared-frontend": "libs/shared-frontend"
   }
