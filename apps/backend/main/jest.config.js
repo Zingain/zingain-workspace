@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: 'backend-main',
+  displayName: 'backend',
   preset: '../../../jest.preset.js',
   globals: {
     'ts-jest': {

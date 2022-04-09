@@ -8,8 +8,8 @@ module.exports = {
       2,
       'always',
       [
-        'backend-main',
-        'frontend-main',
+        'backend',
+        'frontend',
         'hasura',
         'lib',
         'config'
