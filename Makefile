@@ -1,13 +1,140 @@
-COMPOSE_FILE_development=./deployments/development/docker-compose-development.yml
-
 NAME_development=zingain-workspace-development
 
+COMPOSE_FILE_development=./deployments/development/docker-compose-development.yml
+
 BASE_PATH=$(PWD)
+NODE_VERSION=`node -v`
+NPM_VERSION=`npm -v`
 
 all:
 	@echo
 	@echo "please specifiy the command 😭"
 	@echo
+
+git:
+ifeq ($(wildcard ./.git/.*),)
+	@echo
+	@echo "Initialize git"
+	@echo
+	@git init
+else
+	@echo "Git was already initialized"
+endif
+
+engines:
+	@echo
+	@echo "Configure Engines"
+	@echo
+	@node -e "const pkg=require('./package.json'); require('fs').writeFileSync('package.json', JSON.stringify({...pkg,engines:{node:\"${NODE_VERSION}\",npm:\"${NPM_VERSION}\"}}, null, 2));"
+
+envrc:
+	@echo
+	@echo "Configure envrc file"
+	@echo
+	@rm -rf .envrc && touch .envrc
+	@echo "export PASSPHRASE_PRODUCTION='zingain-production'" >> .envrc
+	@echo "export PASSPHRASE_STAGING='zingain-staging'" >> .envrc
+	@echo "export PASSPHRASE_DEVELOPMENT='zingain-development'" >> .envrc
+	@direnv allow
+
+commitizen:
+	@echo
+	@echo "Configure commitizen"
+	@echo
+	@npm install --save-dev @commitlint/cli @commitlint/config-conventional commitizen commitlint-config-gitmoji cz-customizable
+	@rm -rf .cz-config.js commitlint.config.js
+	@curl -o .cz-config.js https://raw.githubusercontent.com/Zingain/zingain-workspace/main/.cz-config.js
+	@curl -o commitlint.config.js https://raw.githubusercontent.com/Zingain/zingain-workspace/main/commitlint.config.js
+
+standard-version:
+	@echo
+	@echo "Configure standard version"
+	@echo
+	@npm install --save-dev standard-version
+	@rm -rf CHANGELOG.md && touch CHANGELOG.md
+	@node -e "const pkg=require('./package.json'); pkg[\"scripts\"]={...pkg.scripts,release:\"standard-version -a\"}; require('fs').writeFileSync('package.json', JSON.stringify({...pkg,\"standard-version\": { skip: { changelog: true,},scripts: {postbump: \"gitmoji-changelog update\",precommit: \"git add CHANGELOG.md\",},}}, null, 2));"
+
+husky:
+	@echo
+	@echo "Configure husky"
+	@echo
+	@npm install --save-dev husky
+	@node -e "const pkg=require('./package.json'); pkg[\"scripts\"]={...pkg.scripts,postintall:\"husky install\"}; require('fs').writeFileSync('package.json', JSON.stringify({...pkg}, null, 2));"
+	@npx husky install
+	@npx husky add .husky/commit-msg "npx commitlint --edit $1"
+
+create-apps:
+	@echo
+	@echo "Create frontend application"
+	@echo
+	@npm i -D @nrwl/next
+	@npx nx generate @nrwl/next:application --name=main --directory=frontend
+	@echo
+	@echo "Create backend application"
+	@echo
+	@npm i -D @nrwl/nest
+	@npx nx generate @nrwl/next:application --name=main --directory=backend
+
+hasura-init:
+	@echo
+	@echo "Configure Hasura"
+	@echo
+	@mkdir -p deployments/development && rm -rf $(COMPOSE_FILE_development) && curl -o $(COMPOSE_FILE_development) https://raw.githubusercontent.com/Zingain/zingain-workspace/main/deployments/development/docker-compose-development.yml
+	@curl -o .dockerignore https://raw.githubusercontent.com/Zingain/zingain-workspace/main/.dockerignore
+	@curl -o .gitignore https://raw.githubusercontent.com/Zingain/zingain-workspace/3c74e055ee8499552b362051c6814b9d312fd0e1/.gitignore
+	@npm i -D nx-tools/nx-docker
+	@npx hasura init services/hasura --endpoint http://localhost:8080 --admin-secret LZrEbLC2wdqIBQjqgOqNwzuUdEWVmzdmtiZBV5LDUTLcXbCw0TR3JZ7
+	@mkdir -p services/hasura && rm -rf services/hasura/.env.development && curl -o services/hasura/.env.development https://raw.githubusercontent.com/Zingain/zingain-workspace/main/services/hasura/.env.development
+	@mkdir -p services/hasura-backend-plus && rm -rf services/hasura-backend-plus/.env.development && curl -o services/hasura-backend-plus/.env.development https://raw.githubusercontent.com/Zingain/zingain-workspace/main/services/hasura-backend-plus/.env.development
+	@mkdir -p services/minio && rm -rf services/minio/.env.development && curl -o services/minio/.env.development https://raw.githubusercontent.com/Zingain/zingain-workspace/main/services/minio/.env.development
+	@mkdir -p services/postgres && rm -rf services/postgres/.env.development && curl -o services/postgres/.env.development https://raw.githubusercontent.com/Zingain/zingain-workspace/main/services/postgres/.env.development
+
+scripts:
+	@echo
+	@echo "Configure necessary script files"
+	@echo
+	@mkdir scripts
+	@rm -rf scripts/check-hasura.sh && curl -o scripts/check-hasura.sh https://raw.githubusercontent.com/Zingain/zingain-workspace/main/scripts/check-hasura.sh
+	@rm -rf scripts/decrypt.sh && curl -o scripts/decrypt.sh https://raw.githubusercontent.com/Zingain/zingain-workspace/main/scripts/decrypt.sh
+
+codegen:
+	@echo
+	@echo "Configure codegen"
+	@echo
+	@npm i -D @graphql-codegen/cli @graphql-codegen/near-operation-file-preset @graphql-codegen/typescript @graphql-codegen/typescript-graphql-request @graphql-codegen/typescript-operations @graphql-codegen/typescript-react-apollo @graphql-codegen/typescript-urql
+	@npm i urql
+	@npx nx generate @nrwl/workspace:library --name=codegen-sdk
+	@mkdir -p libs/codegen-sdk/src/graphql/sample libs/codegen-sdk/src/generated
+	@touch libs/codegen-sdk/src/graphql/sample/sample.graphql libs/codegen-sdk/src/generated/base-types.ts libs/codegen-sdk/src/generated/sdk.ts
+	@echo "export * from './generated/sdk';" > libs/codegen-sdk/src/index.ts
+	@rm -rf libs/codegen-sdk/src/lib
+	@curl -o codegen.config.yml https://raw.githubusercontent.com/Zingain/zingain-workspace/main/codegen.config.yml
+	@node -e "const pkg=require('./package.json'); pkg[\"scripts\"]={...pkg.scripts,codegen: \"graphql-codegen --config codegen.config.yml -w\"}; require('fs').writeFileSync('package.json', JSON.stringify({...pkg}, null, 2));"
+
+tailwind:
+	@echo
+	@echo "Configure tailwind in NEXT"
+	@echo
+	@npm i -D autoprefixer postcss tailwindcss
+	@mkdir apps/frontend/main/styles && touch apps/frontend/main/styles/global.css
+	@echo "@tailwind base;" >> apps/frontend/main/styles/global.css
+	@echo "@tailwind components;" >> apps/frontend/main/styles/global.css
+	@echo "@tailwind utilities;" >> apps/frontend/main/styles/global.css
+	@curl -o apps/frontend/main/tailwind.config.js   https://raw.githubusercontent.com/Zingain/zingain-workspace/main/apps/frontend/main/tailwind.config.js
+	@curl -o apps/frontend/main/postcss.config.js   https://raw.githubusercontent.com/Zingain/zingain-workspace/main/apps/frontend/main/postcss.config.js
+
+setup-workspace:
+	@$(MAKE) --no-print-directory git
+	@$(MAKE) --no-print-directory engines
+	@$(MAKE) --no-print-directory envrc
+	@$(MAKE) --no-print-directory commitizen
+	@$(MAKE) --no-print-directory standard-version
+	@$(MAKE) --no-print-directory husky
+	@$(MAKE) --no-print-directory create-apps
+	@$(MAKE) --no-print-directory hasura-init
+	@$(MAKE) --no-print-directory scripts
+	@$(MAKE) --no-print-directory codegen
+	@$(MAKE) --no-print-directory tailwind
 
 encrypt-envs:
 	@echo
