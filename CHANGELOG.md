@@ -1,5 +1,13 @@
 # Changelog
 
+<a name="0.0.8"></a>
+## 0.0.8 (2022-04-09)
+
+### Added
+
+- ✨ feat(config): command for workspace setup [[226e736](https://github.com/Zingain/zingain-workspace/commit/226e736aafba0453c8800bf825de6d167cd83344)]
+
+
 <a name="0.0.7"></a>
 ## 0.0.7 (2022-04-09)
 
