@@ -83,13 +83,16 @@ hasura-init:
 	@curl -o .dockerignore https://raw.githubusercontent.com/Zingain/zingain-workspace/main/.dockerignore
 	@curl -o .gitignore https://raw.githubusercontent.com/Zingain/zingain-workspace/3c74e055ee8499552b362051c6814b9d312fd0e1/.gitignore
 	@npm i -D @nx-tools/nx-docker
-	@npx hasura init services/hasura --endpoint http://localhost:8080 --admin-secret LZrEbLC2wdqIBQjqgOqNwzuUdEWVmzdmtiZBV5LDUTLcXbCw0TR3JZ7
+	@npx hasura init services/hasura
 	@mkdir -p services/hasura && rm -rf services/hasura/.env.development && curl -o services/hasura/.env.development https://raw.githubusercontent.com/Zingain/zingain-workspace/main/services/hasura/.env.development
-	@git clone https://github.com/nhost/hasura-backend-plus.git hasura-backend-plus/custom/
-	@mv hasura-backend-plus services
-	@rm -rf services/hasura-backend-plus/.env.development && curl -o services/hasura-backend-plus/.env.development https://raw.githubusercontent.com/Zingain/zingain-workspace/main/services/hasura-backend-plus/.env.development
+	@mkdir -p services/hasura/cli && rm -rf services/hasura/cli/.env.development && curl -o services/hasura/cli/.env.development https://raw.githubusercontent.com/Zingain/zingain-workspace/main/services/hasura/cli/.env.development
+	@git clone https://github.com/nhost/hasura-backend-plus.git hasura-backend-plus
+	@mv hasura-backend-plus/custom .
+	@rm -rf ./hasura-backend-plus
+	@mkdir -p services/hasura-backend-plus && rm -rf services/hasura-backend-plus/.env.development && curl -o services/hasura-backend-plus/.env.development https://raw.githubusercontent.com/Zingain/zingain-workspace/main/services/hasura-backend-plus/.env.development
 	@mkdir -p services/minio && rm -rf services/minio/.env.development && curl -o services/minio/.env.development https://raw.githubusercontent.com/Zingain/zingain-workspace/main/services/minio/.env.development
 	@mkdir -p services/postgres && rm -rf services/postgres/.env.development && curl -o services/postgres/.env.development https://raw.githubusercontent.com/Zingain/zingain-workspace/main/services/postgres/.env.development
+	@mv custom services/hasura-backend-plus
 
 scripts:
 	@echo
@@ -98,6 +101,7 @@ scripts:
 	@mkdir scripts
 	@rm -rf scripts/check-hasura.sh && curl -o scripts/check-hasura.sh https://raw.githubusercontent.com/Zingain/zingain-workspace/main/scripts/check-hasura.sh
 	@rm -rf scripts/decrypt.sh && curl -o scripts/decrypt.sh https://raw.githubusercontent.com/Zingain/zingain-workspace/main/scripts/decrypt.sh
+	@chmod +x scripts/check-hasura.sh && chmod +x scripts/decrypt.sh
 
 codegen:
 	@echo
