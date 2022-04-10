@@ -10,7 +10,7 @@ fi
 
 echo ""
 echo "⏱️ Waiting for hasura to start"
-until $(curl --output /dev/null --silent --fail $HASURA_GRAPHQL_ENDPOINT/v1/version); do
+until $(curl --output /dev/null --silent --fail $HBP_ENDPOINT/healthz); do
     printf '.'
     sleep 5
 done

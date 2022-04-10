@@ -184,6 +184,20 @@ decrypt-envs:
 	@echo
 	@./scripts/decrypt.sh "$(PWD)" "$(PASSPHRASE_PRODUCTION)" "production"
 
+decrypt-env-stage:
+	@echo
+	@echo "🚀Decrypt secrets $(stage)"
+	@echo
+	@chmod +x ./scripts/decrypt.sh
+	@./scripts/decrypt.sh "$(PWD)" "$(passphrase)" "$(stage)"
+
+create-env-stage:
+	@echo
+	@echo "🚀Moving secrets of $(stage) to .env"
+	@echo
+	@chmod +x ./scripts/create-env.sh
+	@./scripts/create-env.sh "$(PWD)" "$(stage)"
+
 build:
 	@echo
 	@echo "🏭 Building $(stage) service containers"
