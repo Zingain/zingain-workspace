@@ -126,7 +126,7 @@ tailwind:
 	@echo
 	@echo "Configure tailwind in NEXT"
 	@echo
-	@npm i -D autoprefixer postcss tailwindcsss
+	@npm i -D autoprefixer postcss tailwindcss
 	@mkdir apps/frontend/main/styles && touch apps/frontend/main/styles/global.css
 	@echo "@tailwind base;" >> apps/frontend/main/styles/global.css
 	@echo "@tailwind components;" >> apps/frontend/main/styles/global.css
