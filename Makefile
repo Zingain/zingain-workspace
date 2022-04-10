@@ -26,6 +26,9 @@ engines:
 	@echo "Configure Engines"
 	@echo
 	@node -e "const pkg=require('./package.json'); require('fs').writeFileSync('package.json', JSON.stringify({...pkg,engines:{node:\"${NODE_VERSION}\",npm:\"${NPM_VERSION}\"}}, null, 2));"
+	@node -e "const pkg=require('./package.json'); pkg[\"scripts\"]={...pkg.scripts,clean:\"rimraf node_modules/.cache/nx dist\"}; require('fs').writeFileSync('package.json', JSON.stringify({...pkg}, null, 2));"
+	@node -e "const pkg=require('./package.json'); pkg[\"scripts\"]={...pkg.scripts,start:\"nx run-many --target=serve --all --parallel --maxParallel=20\"}; require('fs').writeFileSync('package.json', JSON.stringify({...pkg}, null, 2));"
+	@node -e "const pkg=require('./package.json'); pkg[\"scripts\"]={...pkg.scripts,build:\"nx run-many --target=build --all --parallel --maxParallel=20\"}; require('fs').writeFileSync('package.json', JSON.stringify({...pkg}, null, 2));"
 
 envrc:
 	@echo
@@ -45,6 +48,8 @@ commitizen:
 	@rm -rf .cz-config.js commitlint.config.js
 	@curl -o .cz-config.js https://raw.githubusercontent.com/Zingain/zingain-workspace/main/.cz-config.js
 	@curl -o commitlint.config.js https://raw.githubusercontent.com/Zingain/zingain-workspace/main/commitlint.config.js
+	@node -e "const pkg=require('./package.json'); pkg[\"scripts\"]={...pkg.scripts,commit:\"git-cz\"}; require('fs').writeFileSync('package.json', JSON.stringify({...pkg}, null, 2));"
+
 
 standard-version:
 	@echo
@@ -74,6 +79,8 @@ create-apps:
 	@echo
 	@npm i -D @nrwl/nest
 	@npx nx generate @nrwl/next:application --name=main --directory=backend
+	@node -e "const pkg=require('./package.json'); pkg[\"scripts\"]={...pkg.scripts,\"frontend:serve\": \"nx run-many --target=serve --projects=frontend --parallel --maxParallel=20\",\"backend:serve\":\"nx run-many --target=serve --projects=backend --parallel --maxParallel=20\"}; require('fs').writeFileSync('package.json', JSON.stringify({...pkg}, null, 2));"
+
 
 hasura-init:
 	@echo
@@ -110,8 +117,8 @@ codegen:
 	@npm i -D @graphql-codegen/cli @graphql-codegen/near-operation-file-preset @graphql-codegen/typescript @graphql-codegen/typescript-graphql-request @graphql-codegen/typescript-operations @graphql-codegen/typescript-react-apollo @graphql-codegen/typescript-urql
 	@npm i urql
 	@npx nx generate @nrwl/workspace:library --name=codegen-sdk
-	@mkdir -p libs/codegen-sdk/src/graphql/sample libs/codegen-sdk/src/generated
-	@touch libs/codegen-sdk/src/graphql/sample/sample.graphql libs/codegen-sdk/src/generated/base-types.ts libs/codegen-sdk/src/generated/sdk.ts
+	@mkdir -p libs/codegen-sdk/src/graphql libs/codegen-sdk/src/generated apps/frontend/main/graphql
+	@touch libs/codegen-sdk/src/graphql/test.graphql libs/codegen-sdk/src/generated/base-types.ts libs/codegen-sdk/src/generated/sdk.ts apps/frontend/main/graphql/test.graphql
 	@echo "export * from './generated/sdk';" > libs/codegen-sdk/src/index.ts
 	@rm -rf libs/codegen-sdk/src/lib
 	@curl -o codegen.config.yml https://raw.githubusercontent.com/Zingain/zingain-workspace/main/codegen.config.yml
@@ -121,7 +128,7 @@ tailwind:
 	@echo
 	@echo "Configure tailwind in NEXT"
 	@echo
-	@npm i -D autoprefixer postcss tailwindcss
+	@npm i -D autoprefixer postcss tailwindcsss
 	@mkdir apps/frontend/main/styles && touch apps/frontend/main/styles/global.css
 	@echo "@tailwind base;" >> apps/frontend/main/styles/global.css
 	@echo "@tailwind components;" >> apps/frontend/main/styles/global.css
@@ -129,7 +136,7 @@ tailwind:
 	@curl -o apps/frontend/main/tailwind.config.js   https://raw.githubusercontent.com/Zingain/zingain-workspace/main/apps/frontend/main/tailwind.config.js
 	@curl -o apps/frontend/main/postcss.config.js   https://raw.githubusercontent.com/Zingain/zingain-workspace/main/apps/frontend/main/postcss.config.js
 
-setup-workspace:
+initial-workspace:
 	@$(MAKE) --no-print-directory git
 	@$(MAKE) --no-print-directory engines
 	@$(MAKE) --no-print-directory envrc
@@ -141,6 +148,10 @@ setup-workspace:
 	@$(MAKE) --no-print-directory scripts
 	@$(MAKE) --no-print-directory codegen
 	@$(MAKE) --no-print-directory tailwind
+	@echo
+	@echo "In the codegen config file update the baseTypesPath from '~@zingain-workspace/codegen-sdk/base-types' to '~@{your-workspace-name}/codegen-sdk/base-types'"
+	@echo
+	@echo "Please import the global/styles.css file in your frontend for accessing trailwind commands."
 
 encrypt-envs:
 	@echo
