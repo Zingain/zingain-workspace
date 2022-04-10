@@ -77,8 +77,8 @@ create-apps:
 	@echo "Create backend application"
 	@echo
 	@npm i -D @nrwl/nest
-	@npx nx generate @nrwl/next:application --name=main --directory=backend
-	@node -e "const pkg=require('./package.json'); pkg[\"scripts\"]={...pkg.scripts,\"frontend:serve\": \"nx run-many --target=serve --projects=frontend --parallel --maxParallel=20\",\"backend:serve\":\"nx run-many --target=serve --projects=backend --parallel --maxParallel=20\"}; require('fs').writeFileSync('package.json', JSON.stringify({...pkg}, null, 2));"
+	@npx nx generate @nrwl/nest:application --name=main --directory=backend
+	@node -e "const pkg=require('./package.json'); pkg[\"scripts\"]={...pkg.scripts,\"frontend:serve\": \"nx run-many --target=serve --projects=frontend-main --parallel --maxParallel=20\",\"backend:serve\":\"nx run-many --target=serve --projects=backend-main --parallel --maxParallel=20\"}; require('fs').writeFileSync('package.json', JSON.stringify({...pkg}, null, 2));"
 
 hasura-init:
 	@echo
@@ -133,6 +133,9 @@ tailwind:
 	@echo "@tailwind utilities;" >> apps/frontend/main/styles/global.css
 	@curl -o apps/frontend/main/tailwind.config.js   https://raw.githubusercontent.com/Zingain/zingain-workspace/main/apps/frontend/main/tailwind.config.js
 	@curl -o apps/frontend/main/postcss.config.js   https://raw.githubusercontent.com/Zingain/zingain-workspace/main/apps/frontend/main/postcss.config.js
+	@rm -rf apps/frontend/main/pages/styles.css apps/frontend/main/pages/index.module.css apps/frontend/main/pages/_app.tsx apps/frontend/main/pages/index.tsx
+	@curl -o apps/frontend/main/pages/_app.tsx https://raw.githubusercontent.com/Zingain/zingain-workspace/welcome-frontend/apps/frontend/main/pages/_app.tsx
+	@curl -o apps/frontend/main/pages/index.tsx https://raw.githubusercontent.com/Zingain/zingain-workspace/welcome-frontend/apps/frontend/main/pages/index.tsx
 
 initial-workspace:
 	@$(MAKE) --no-print-directory git
