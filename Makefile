@@ -50,7 +50,6 @@ commitizen:
 	@curl -o commitlint.config.js https://raw.githubusercontent.com/Zingain/zingain-workspace/main/commitlint.config.js
 	@node -e "const pkg=require('./package.json'); pkg[\"scripts\"]={...pkg.scripts,commit:\"git-cz\"}; require('fs').writeFileSync('package.json', JSON.stringify({...pkg}, null, 2));"
 
-
 standard-version:
 	@echo
 	@echo "Configure standard version"
