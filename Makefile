@@ -151,8 +151,6 @@ initial-workspace:
 	@$(MAKE) --no-print-directory tailwind
 	@echo
 	@echo "In the codegen config file update the baseTypesPath from '~@zingain-workspace/codegen-sdk/base-types' to '~@{your-workspace-name}/codegen-sdk/base-types'"
-	@echo
-	@echo "Please import the global/styles.css file in your frontend for accessing trailwind commands."
 
 encrypt-envs:
 	@echo
