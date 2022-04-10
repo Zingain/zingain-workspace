@@ -81,7 +81,6 @@ create-apps:
 	@npx nx generate @nrwl/next:application --name=main --directory=backend
 	@node -e "const pkg=require('./package.json'); pkg[\"scripts\"]={...pkg.scripts,\"frontend:serve\": \"nx run-many --target=serve --projects=frontend --parallel --maxParallel=20\",\"backend:serve\":\"nx run-many --target=serve --projects=backend --parallel --maxParallel=20\"}; require('fs').writeFileSync('package.json', JSON.stringify({...pkg}, null, 2));"
 
-
 hasura-init:
 	@echo
 	@echo "Configure Hasura"
